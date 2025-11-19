@@ -1,0 +1,38 @@
+﻿@model IEnumerable<OrderMgmt.Domain.Product>
+
+@{
+    ViewData["Title"] = "Ürün Listesi";
+}
+
+<h2>Ürün Listesi</h2>
+
+<p>
+    <a asp-action="Add" class="btn btn-success">Yeni Ürün Ekle</a>
+</p>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Stok Kodu</th>
+            <th>Stok Adı</th>
+            <th>Aktif mi?</th>
+            <th>Fiyat</th>
+            <th>İşlemler</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.StockCode</td>
+                <td>@item.StockName</td>
+                <td>@(item.IsActive ? "Evet" : "Hayır")</td>
+                <td>@item.Price.ToString("C2")</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.ProductId" class="btn btn-primary btn-sm">Düzenle</a>
+                    <a asp-action="Delete" asp-route-id="@item.ProductId" class="btn btn-danger btn-sm">Sil</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

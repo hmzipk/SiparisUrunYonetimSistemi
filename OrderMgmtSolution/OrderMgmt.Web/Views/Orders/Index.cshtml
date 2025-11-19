@@ -1,0 +1,48 @@
+﻿@model IEnumerable<OrderMgmt.Domain.Order>
+
+<h2>Sipariş Listesi</h2>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Sipariş No</th>
+            <th>Müşteri</th>
+            <th>Ürün</th>
+            <th>Miktar</th>
+            <th>Birim Fiyat</th>
+            <th>Toplam</th>
+            <th>Tarih</th>
+            <th>Teslim</th>
+            <th>İşlem</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null && Model.Any())
+        {
+            foreach (var order in Model)
+            {
+                <tr>
+                    <td>@order.OrderNo</td>
+                    <td>@order.Customer?.CustomerName</td>
+                    <td>@order.Product?.StockName</td>
+                    <td>@order.Quantity</td>
+                    <td>@order.UnitPrice</td>
+                    <td>@order.TotalAmount</td>
+                    <td>@order.CreatedAt.ToString("dd.MM.yyyy HH:mm")</td>
+                    <td>@(order.DeliveryConfirmed ? "Onaylandı" : "Bekliyor")</td>
+                    <td>
+                        <a asp-action="Delete" asp-route-id="@order.OrderId" class="btn btn-danger btn-sm">
+                            Sil
+                        </a>
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr><td colspan="9" class="text-center">Henüz sipariş yok.</td></tr>
+        }
+    </tbody>
+</table>
+
+<a asp-action="Add" class="btn btn-primary">Yeni Sipariş</a>

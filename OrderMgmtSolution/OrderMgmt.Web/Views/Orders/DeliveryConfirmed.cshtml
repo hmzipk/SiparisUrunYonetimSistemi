@@ -1,0 +1,11 @@
+﻿@model OrderMgmt.Domain.Order
+
+<h2>Sipariş Teslim Onayı</h2>
+
+<div class="alert alert-success">
+    <strong>Tebrikler!</strong> @Model.OrderNo numaralı sipariş teslim alındı olarak işaretlendi.
+</div>
+
+<p>Ürün: @Model.Product?.StockName</p>
+<p>Miktar: @Model.Quantity</p>
+<p>Toplam Tutar: @Model.TotalAmount</p>

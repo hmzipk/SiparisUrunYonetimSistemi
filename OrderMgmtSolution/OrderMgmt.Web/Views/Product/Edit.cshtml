@@ -1,0 +1,39 @@
+﻿@model OrderMgmt.Domain.Product
+
+@{
+    ViewData["Title"] = "Ürün Düzenle";
+}
+
+<h2>Ürün Düzenle</h2>
+
+<form asp-action="Edit" method="post">
+    <div class="form-group">
+        <label asp-for="StockCode" class="control-label">Stok Kodu</label>
+        <input asp-for="StockCode" class="form-control" />
+        <span asp-validation-for="StockCode" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="StockName" class="control-label">Stok Adı</label>
+        <input asp-for="StockName" class="form-control" />
+        <span asp-validation-for="StockName" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Price" class="control-label">Fiyat</label>
+        <input asp-for="Price" class="form-control" />
+        <span asp-validation-for="Price" class="text-danger"></span>
+    </div>
+
+    <div class="form-group form-check">
+        <input asp-for="IsActive" class="form-check-input" />
+        <label asp-for="IsActive" class="form-check-label">Aktif mi?</label>
+    </div>
+
+    <input type="hidden" asp-for="ProductId" />
+
+    <div class="form-group mt-3">
+        <input type="submit" value="Kaydet" class="btn btn-primary" />
+        <a asp-action="Index" class="btn btn-secondary">Listeye Dön</a>
+    </div>
+</form>

@@ -1,0 +1,50 @@
+﻿<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewData["Title"] - Ürün Yönetim Paneli</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+</head>
+<body>
+    <!-- Üst Menü -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand fw-bold" asp-controller="Home" asp-action="Index">
+                Sipariş & Ürün Yönetim Sistemi
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="mainNavbar">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <!-- Product menüsü -->
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Product" asp-action="Index">Ürünler</a>
+                    </li>
+                    <!-- Customer menüsü -->
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Customer" asp-action="Index">Müşteriler</a>
+                    </li>
+                    <!-- Order menüsü -->
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Orders" asp-action="Index">Siparişler</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- İçerik -->
+    <div class="container mt-4">
+        @RenderBody()
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-light text-center py-3 mt-5 border-top">
+        <small>&copy; @DateTime.Now.Year - Ürün Yönetim Paneli</small>
+    </footer>
+
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

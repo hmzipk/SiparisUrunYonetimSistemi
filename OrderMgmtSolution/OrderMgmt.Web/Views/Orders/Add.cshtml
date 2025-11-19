@@ -1,0 +1,53 @@
+﻿@model OrderMgmt.Domain.Order
+
+<h2>Yeni Sipariş</h2>
+
+<form asp-action="Add" method="post">
+    <div class="form-group">
+        <label>Müşteri E-posta</label>
+        <input type="email" name="CustomerEmail" class="form-control" required />
+    </div>
+
+    <div class="form-group">
+        <label>Ürün</label>
+        <select asp-for="ProductId" asp-items="ViewBag.Products" class="form-control" id="productSelect"></select>
+    </div>
+
+    <div class="form-group">
+        <label>Miktar</label>
+        <input asp-for="Quantity" type="number" min="1" class="form-control" id="quantityInput" required />
+    </div>
+
+    <div class="form-group">
+        <label>Birim Fiyat</label>
+        <input type="text" id="unitPrice" class="form-control" readonly />
+    </div>
+
+    <div class="form-group">
+        <label>Toplam Tutar</label>
+        <input type="text" id="totalAmount" class="form-control" readonly />
+    </div>
+
+    <button type="submit" class="btn btn-success">Sipariş Oluştur</button>
+</form>
+
+<script>
+    const productPrices = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(ViewBag.ProductPrices));
+
+    const productSelect = document.getElementById("productSelect");
+    const quantityInput = document.getElementById("quantityInput");
+    const unitPriceInput = document.getElementById("unitPrice");
+    const totalAmountInput = document.getElementById("totalAmount");
+
+    function updatePrice() {
+        const productId = productSelect.value;
+        const quantity = parseInt(quantityInput.value) || 0;
+        const unitPrice = productPrices[productId] || 0;
+
+        unitPriceInput.value = unitPrice.toFixed(2) + " TL";
+        totalAmountInput.value = (unitPrice * quantity).toFixed(2) + " TL";
+    }
+
+    productSelect.addEventListener("change", updatePrice);
+    quantityInput.addEventListener("input", updatePrice);
+</script>

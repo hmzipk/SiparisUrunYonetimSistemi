@@ -1,0 +1,44 @@
+﻿@model OrderMgmt.Domain.Order
+
+@{
+    ViewData["Title"] = "Sipariş Sil";
+}
+
+<h2>Sipariş Sil</h2>
+
+<h4>Bu siparişi silmek istediğinize emin misiniz?</h4>
+<hr />
+
+<div>
+    <dl class="row">
+        <dt class="col-sm-2">Sipariş No</dt>
+        <dd class="col-sm-10">@Model.OrderNo</dd>
+
+        <dt class="col-sm-2">Müşteri</dt>
+        <dd class="col-sm-10">@Model.Customer?.CustomerName</dd>
+
+        <dt class="col-sm-2">Ürün</dt>
+        <dd class="col-sm-10">@Model.Product?.StockName</dd>
+
+        <dt class="col-sm-2">Miktar</dt>
+        <dd class="col-sm-10">@Model.Quantity</dd>
+
+        <dt class="col-sm-2">Birim Fiyat</dt>
+        <dd class="col-sm-10">@Model.UnitPrice.ToString("N2") TL</dd>
+
+        <dt class="col-sm-2">Toplam Tutar</dt>
+        <dd class="col-sm-10">@Model.TotalAmount.ToString("N2") TL</dd>
+
+        <dt class="col-sm-2">Oluşturulma Tarihi</dt>
+        <dd class="col-sm-10">@Model.CreatedAt.ToString("dd.MM.yyyy HH:mm")</dd>
+
+        <dt class="col-sm-2">Teslim Durumu</dt>
+        <dd class="col-sm-10">@(Model.DeliveryConfirmed ? "Onaylandı" : "Bekliyor")</dd>
+    </dl>
+</div>
+
+<form asp-action="DeleteConfirmed" method="post">
+    <input type="hidden" asp-for="OrderId" />
+    <button type="submit" class="btn btn-danger">Sil</button>
+    <a asp-action="Index" class="btn btn-secondary">İptal</a>
+</form>
